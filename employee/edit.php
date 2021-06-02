@@ -19,7 +19,7 @@ $contact = $row["contact"];
 $address = $row["address"];
 $department = $row["department"];
 $degree = $row["degree"];
-$pic = $row["pic"];
+$org_pic = $row["pic"];
 $role = $row["role"];
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -36,6 +36,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
   $department = test_input($_POST["department"]);
   $degree = test_input($_POST["degree"]);
   $role = test_input($_POST["role"]);
+  $pic = $_FILES["pic"];
+  
 
 
   $err = false;
@@ -137,6 +139,32 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     }
   }
 
+  if ($_FILES['pic']['error'] == 4) {
+    $err = false;
+    $target_file = $org_pic;
+  } else {
+    $target_dir = "../img/uploads/";
+    $source_file = $target_dir . basename($pic["name"]);
+    $imageFileType = strtolower(pathinfo($source_file,PATHINFO_EXTENSION));
+    $target_file = $target_dir . uniqid() . '.' . $imageFileType;
+    
+    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+    && $imageFileType != "gif" ) {
+      $err = true;
+      $pic_err = "Invalid File.";
+    } else {
+      $upload = move_uploaded_file($_FILES["pic"]["tmp_name"], $target_file);
+      if ($upload) {
+        $err = false;
+      } else {
+        $err = true;
+      $pic_err = "Cannot upload file.";
+    }
+  }
+}
+
+
+
 
   if(!$err) {
 
@@ -150,7 +178,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             address = '$address', 
             department = '$department', 
             degree = '$degree', 
-            role = '$role' 
+            role = '$role', 
+            pic = '$target_file'
         WHERE user_id = $u_id;";  
 
         $result = mysqli_query($conn, $sql);
@@ -183,9 +212,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
           echo "<div class='alert alert-success'>" . $succ_msg . "</div>";
         }
       ?>
+
+      
       <div class="col-12">
-        <img src="<?php echo $pic; ?>" style="height:200px; width:auto;">
+        <img src="<?php echo $org_pic; ?>" style="height:200px; width:auto;">
       </div>
+      <div class="col-md-12">
+        <label for="pic" class="form-label">Display Photo</label>
+        <input name="pic" type="file" class="form-control" id="pic">
+        <?php
+          if(isset($pic_err)) {
+            echo "<div class='text-danger'>" . $pic_err . "</div>";
+          }
+        ?>
+    </div>
 
 
     <div class="col-3">
@@ -207,7 +247,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="col-md-6">
         <label for="firstname" class="form-label">First Name</label>
-        <input <?php if(!empty($firstname)) { echo "value=" . $firstname; } ?> name="firstname" type="text" class="form-control" id="firstname" placeholder="First and Middle Name (if any)" required>
+        <input <?php if(!empty($firstname)) { echo 'value="'. $firstname . '"'; } ?> name="firstname" type="text" class="form-control" id="firstname" placeholder="First and Middle Name (if any)" required>
         <?php
           if(isset($firstname_err)) {
             echo "<div class='text-danger'>" . $firstname_err . "</div>";
@@ -217,7 +257,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="col-md-6">
         <label for="lastname" class="form-label">Last Name</label>
-        <input <?php if(!empty($lastname)) { echo "value=" . $lastname; } ?> name="lastname" type="text" class="form-control" id="lastname" required>
+        <input <?php if(!empty($lastname)) { echo 'value="' . $lastname . '"'; } ?> name="lastname" type="text" class="form-control" id="lastname" required>
         <?php
           if(isset($lastname_err)) {
             echo "<div class='text-danger'>" . $lastname_err . "</div>";

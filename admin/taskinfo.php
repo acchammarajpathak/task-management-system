@@ -15,7 +15,7 @@ include("includes/d_header.php");
     </tr>
   </thead>
   <tbody>
-    <?php
+    <?php                                                                                                                                             
     $sql = "SELECT * FROM task_info;";
     $res = mysqli_query($conn, $sql);
     $seq = 1; 

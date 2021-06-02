@@ -39,7 +39,7 @@ $row = mysqli_fetch_assoc($result);
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-center d-flex" style="width:80%;">
         <li class="display-5 text-light nav-item">
-          TMS
+          Task Management System
         </li>
       </ul>
 	  <ul class="navbar-nav mb-2 mb-lg-0">

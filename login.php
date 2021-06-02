@@ -134,7 +134,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
     <div class="mb-3">
-      New Here? <a href="../register.php">Register</a> | <a href="#">Forget Password?</a>
+      New Here? <a href="register.php">Register</a> | <a href="#">Forget Password?</a>
     </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>
