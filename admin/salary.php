@@ -37,7 +37,7 @@ $result = mysqli_query($conn, $sql);
 			echo "<td>".$employee['bonus']."</td>";
 			echo "<td>".$employee['tax']."</td>";
 			echo "<td>".$total_salary."</td>";
-			<td><a class="btn btn-sm btn-info" href="edit_salary.php?id=?php echo $row['task_info_id']; ?">Update</a></td>
+			echo "<td> <a href='edit_salary.php?id=" . $employee['emp_id'] . "' class='btn btn-sm btn-info'>Update</a> </td>";
 			echo "</tr>";
 		}
 	?>

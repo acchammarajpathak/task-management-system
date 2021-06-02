@@ -38,7 +38,11 @@ $result = mysqli_query($conn, $sql);
 					echo "<td>".$employee['end_date']."</td>";
 					echo "<td>".$employee['reason']."</td>";
 					echo "<td>".$employee['status']."</td>";
-					echo "<td> <a href='approve_user.php?id=". $employee['user_id'] ."'  class='btn btn-sm btn-success'>Approve</a> <a href='delete.php?source=dash&id=". $employee['user_id'] ."' class='btn btn-sm btn-danger'>Delete</a> </td>";
+					if ($employee['status'] == 'Pending') {
+						echo "<td> <a href='leave_action.php?action=approve&id=". $employee['leave_id'] ."'  class='btn btn-sm btn-success'>Approve</a> <a href='leave_action.php?action=deny&id=". $employee['leave_id'] ."' class='btn btn-sm btn-danger'>Deny</a> </td>";
+					} else {
+						echo "<td>-</td>";
+					}
 					echo "</tr>";
 					$seq+=1;
 				}

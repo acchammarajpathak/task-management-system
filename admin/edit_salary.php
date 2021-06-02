@@ -5,27 +5,27 @@ include("includes/d_header.php");
 $u_id = $_GET['id'];
 
 $sql2 = "SELECT * FROM salary WHERE emp_id = $u_id;";  
-
 $result2 = mysqli_query($conn, $sql2);
-
 $row = mysqli_fetch_assoc($result2);
 
-$firstname = $row["firstname"];
-$lastname = $row["lastname"];
+$user_sql = "SELECT firstname, lastname from users WHERE user_id = $u_id;";
+$user_result = mysqli_query($conn, $user_sql);
+$user_row = mysqli_fetch_assoc($user_result);
+
+
+$firstname = $user_row["firstname"];
+$lastname = $user_row["lastname"];
 $basesalary = $row["base_salary"];
 $bonus = $row["bonus"];
 $tax = $row["tax"];
-$total = $row["total"];
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
   
   include("../includes/conn.php");
-  $firstname = test_input($_POST["firstname"];
-  $lastname = test_input($_POST["lastname"];
-  $basesalary = test_input($_POST["base_salary"];
-  $bonus = test_input($_POST["bonus"];
-  $tax = test_input($_POST["tax"];
-  $total = test_input($_POST["total"];
+
+  $basesalary = test_input($_POST["basesalary"]);
+  $bonus = test_input($_POST["bonus"]);
+  $tax = test_input($_POST["tax"]);
 
   $err = false;
 
@@ -52,7 +52,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
  if(!$err) {
   
       $sql = "UPDATE salary  
-      SET basesalary = '$basesalary',
+      SET base_salary = '$basesalary',
         bonus = '$bonus',
         tax = '$tax'
         WHERE emp_id = $u_id;";  
@@ -65,9 +65,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
       } else {
         $non_err = "Some Errors Occurred.";
       }
-
-
-}
+  }
 }
 ?>
 
@@ -90,47 +88,39 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
   ?>
 
 
+    <div class="col-12 text-success">Employee ID: <?php echo $u_id;?></div>
+    <div class="col-12 text-primary">First Name: <?php echo $firstname;?></div>
+    <div class="col-12 text-primary">Last Name: <?php echo $lastname;?></div>
 
 
 <div class="col-12">
-    <label for="remarks" class="form-label">Base Salary</label>
-    <input <?php if(!empty($remarks)) { echo "value=" . $remarks; } ?> name="remarks" type="text" class="form-control" id="remarks">
+    <label for="basesalary" class="form-label">Base Salary</label>
+    <input id="basesalary" <?php if(!empty($basesalary)) { echo "value=" . $basesalary; } ?> name="basesalary" type="number" class="form-control">
     <?php
-      if(isset($remarks_err)) {
-        echo "<span class='text-danger'>" . $remarks_err . "</span>";
+      if(isset($basesalary_err)) {
+        echo "<span class='text-danger'>" . $basesalary_err . "</span>";
       }
     ?>
 
 </div>
 
 <div class="col-12">
-    <label for="remarks" class="form-label">Bonus</label>
-    <input <?php if(!empty($remarks)) { echo "value=" . $remarks; } ?> name="remarks" type="text" class="form-control" id="remarks">
+    <label for="bonus" class="form-label">Bonus</label>
+    <input <?php if(!empty($bonus)) { echo "value=" . $bonus; } ?> name="bonus" type="number" class="form-control" id="bonus">
     <?php
-      if(isset($remarks_err)) {
-        echo "<span class='text-danger'>" . $remarks_err . "</span>";
+      if(isset($bonus_err)) {
+        echo "<span class='text-danger'>" . $bonus_err . "</span>";
       }
     ?>
 
 </div>
 
 <div class="col-12">
-    <label for="remarks" class="form-label">Tax</label>
-    <input <?php if(!empty($remarks)) { echo "value=" . $remarks; } ?> name="remarks" type="text" class="form-control" id="remarks">
+    <label for="tax" class="form-label">Tax</label>
+    <input <?php if(!empty($tax)) { echo "value=" . $tax; } ?> name="tax" type="number" class="form-control" id="tax">
     <?php
-      if(isset($remarks_err)) {
-        echo "<span class='text-danger'>" . $remarks_err . "</span>";
-      }
-    ?>
-
-</div>
-
-<div class="col-12">
-    <label for="remarks" class="form-label">Total</label>
-    <input <?php if(!empty($remarks)) { echo "value=" . $remarks; } ?> name="remarks" type="text" class="form-control" id="remarks">
-    <?php
-      if(isset($remarks_err)) {
-        echo "<span class='text-danger'>" . $remarks_err . "</span>";
+      if(isset($tax_err)) {
+        echo "<span class='text-danger'>" . $tax_err . "</span>";
       }
     ?>
 
