@@ -22,6 +22,7 @@ $result = mysqli_query($conn, $sql);
       <th scope="col">Task ID</th>
       <th scope="col">Assigned to</th>
       <th scope="col">Task Name</th>
+	  <th scope="col">Assign Date</th>
 	  <th scope="col">Due Date</th>
 	  <th scope="col">Submission Date</th>
 	  <th scope="col">Status</th>
@@ -39,6 +40,7 @@ $result = mysqli_query($conn, $sql);
 			echo "<td>".$employee['firstname']."</td>";
 			echo "<td>".$employee['task_name']."</td>";
 			echo "<td>".$employee['due_date']."</td>";
+			echo "<td>".$employee['assign_date']."</td>";
 			echo "<td>".$employee['sub_date']."</td>";
 			echo "<td>".$employee['status']."</td>";
 			if ($employee['status'] == 'Pending') {

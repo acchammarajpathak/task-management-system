@@ -35,7 +35,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
   $address = test_input($_POST["address"]);
   $department = test_input($_POST["department"]);
   $degree = test_input($_POST["degree"]);
-  $role = test_input($_POST["role"]);
   $pic = $_FILES["pic"];
   
 
@@ -43,16 +42,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
   $err = false;
   // $role_err = $address_err = $degree_err = $department_err = $nid_err = $firstname_err = $contact_err = $lastname_err = $gender_err = $birthday_err = $email_err = $password_err = $non_err = "";
   
-  if (empty($role)) {
-    $err = true;
-    $role_err = "Role is required.";
-  } else {
-    $roles = array("admin", "employee", "user");
-    if (!in_array($role, $roles)) {
-      $err = true;
-      $role_err = "Invalid Role.";
-    }
-  }
 
   if (empty($firstname)) {
     $err = true;
@@ -178,7 +167,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             address = '$address', 
             department = '$department', 
             degree = '$degree', 
-            role = '$role', 
             pic = '$target_file'
         WHERE user_id = $u_id;";  
 
@@ -231,10 +219,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="col-3">
         <label for="role" class="form-label">Role</label>
         <select name="role" id="role" class="form-select" required>
-            <option value="">Choose One</option>
-            <option <?php if(isset($role) && $role == "admin") { echo "selected"; } ?> value="admin">Admin</option>
-            <option <?php if(isset($role) && $role == "employee") { echo "selected"; } ?> value="employee">Employee</option>
-            <option <?php if(isset($role) && $role == "user") { echo "selected"; } ?> value="user">User</option>
+             <?php
+              if(isset($role)) {
+                echo "<option selected value='$role'>" . ucfirst($role) . "</option>";
+             }
+             ?>
+            
         </select>
         <?php
           if(isset($role_err)) {
