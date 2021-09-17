@@ -55,7 +55,7 @@ include("includes/d_header.php");
 					echo "<td>".$employee['due_date']."</td>";
 					echo "<td>".$employee['status']."</td>";
 					if ($employee['status'] == 'Pending') {
-						echo "<td> <a href='task_complete.php?id=" . $employee['task_id'] . "' class='btn btn-sm btn-success'>Complete</a> </td>";
+						echo "<td> <a href='task_complete.php?id=" . $employee['task_id'] . "' class='btn btn-sm btn-success'>Submit</a> </td>";
 					} else {
 						echo '<td>-</td>';
 					}

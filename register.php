@@ -173,11 +173,30 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
       $upload = move_uploaded_file($_FILES["pic"]["tmp_name"], $target_file);
       if ($upload) {
+
+        // generates random string
+        $rand_token = openssl_random_pseudo_bytes(16);
+        //change binary to hexadecimal
+        $token = bin2hex($rand_token);
     
-        $sql = "INSERT INTO users (firstname, lastname, email, password, birthday, gender, contact, address, department, degree, pic, role, is_active)
-        VALUES ('$firstname', '$lastname', '$email', '$password', '$birthday', '$gender', '$contact', '$address', '$department', '$degree', '$target_file', '$role', '$is_active');";  
+        $sql = "INSERT INTO users (firstname, lastname, email, password, birthday, gender, contact, address, department, degree, pic, role, is_active, token, verified)
+        VALUES ('$firstname', '$lastname', '$email', '$password', '$birthday', '$gender', '$contact', '$address', '$department', '$degree', '$target_file', '$role', '$is_active', '$token', 0);";  
 
         $result = mysqli_query($conn, $sql);
+
+        $verify_link = "http://localhost/201itp/verify.php?token=" . $token;
+
+        $txt = "Hi $firstname,
+
+        We just need to verify your email address before you can access customer portal.
+        
+        Verify your email address verification link
+        
+        Thanks!  
+        The 201IT team" 
+         . $verify_link;
+
+        mail($email, "Verify your account", $txt, null);
 
         if($result) {
           $succ_msg = "Successfully Registered!";

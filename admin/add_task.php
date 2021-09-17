@@ -9,6 +9,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
   $taskname = test_input($_POST["taskname"]);
   $taskprice = test_input($_POST["taskprice"]);
   $remarks = test_input($_POST["remarks"]);
+  $points = test_input($_POST["points"]);
 
   $err = false;
 
@@ -22,6 +23,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $taskname_err = "Task Price is required";
  }
 
+ if (empty($points)) {
+  $err = true;
+  $points_err = "Points is required";
+}
+
  if ($_SESSION['role'] != 'admin') {
     $err = true;
     $non_err = "Permission Denied!";
@@ -29,8 +35,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
  if(!$err) {
   
-      $sql = "INSERT INTO task_info (task_name, price, remarks)
-      VALUES ('$taskname', '$taskprice', '$remarks');";  
+      $sql = "INSERT INTO task_info (task_name, price, remarks,points)
+      VALUES ('$taskname', '$taskprice', '$remarks','$points');";  
 
       $result = mysqli_query($conn, $sql);
 
@@ -80,6 +86,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <?php
       if(isset($taskprice_err)) {
         echo "<div class='text-danger'>" . $taskprice_err . "</div>";
+      }
+    ?>
+</div>
+
+<div class="col-md-12">
+    <label for="taskprice" class="form-label">Points</label>
+    <input <?php if(!empty($points)) { echo "value=" . $points; } ?> name="points" type="number" class="form-control" id="points" required>
+    <?php
+      if(isset($points_err)) {
+        echo "<div class='text-danger'>" . $points_err . "</div>";
       }
     ?>
 </div>

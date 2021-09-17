@@ -41,7 +41,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
   
    if(!$err) {
      
-       $sql = "SELECT * from users WHERE email = '$email' AND is_active = 1;";
+       $sql = "SELECT * from users WHERE email = '$email' AND is_active = 1 AND verified = 1;";
        
        $result = mysqli_query($conn, $sql);
        
@@ -134,7 +134,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
     <div class="mb-3">
-      New Here? <a href="register.php">Register</a> | <a href="#">Forget Password?</a>
+      New Here? <a href="register.php">Register</a> | <a href="forget-password.php">Forget Password?</a>
     </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>

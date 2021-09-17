@@ -26,7 +26,7 @@ $total_sub_task = $total_com_task + $total_pend_task;
 ?>
 
 
-<div class="container text-center" style="width: 500px; height: 500px;"> 
+<div class="container text-center" style="width: 350px; height: 350px;"> 
     <canvas id="taskChart"></canvas>
     <script>
     var ctx = document.getElementById('taskChart').getContext('2d');
@@ -54,6 +54,12 @@ $total_sub_task = $total_com_task + $total_pend_task;
 </div>
 
 <div class="container my-3">
+    <?php
+if (isset($_GET['success'])) {
+    echo '<div class="alert alert-success">Successfully updated</div>';
+}
+
+    ?>
 <h2 class="display-6 text-center text-success">My Tasks</h2>
     <table class="table">
     <thead>
@@ -65,6 +71,7 @@ $total_sub_task = $total_com_task + $total_pend_task;
         <th scope="col">Submitted Date</th>
         <th scope="col">Due Date</th>
         <th scope="col">Status</th>
+        <th scope="col">Options</th>
         </tr>
     </thead>
     <tbody> 
@@ -82,6 +89,13 @@ $total_sub_task = $total_com_task + $total_pend_task;
                 echo "<td>".$employee['sub_date']."</td>";
                 echo "<td>".$employee['due_date']."</td>";
 				echo "<td>".$employee['status']."</td>";
+                if ($employee['status'] == 'Completed' || $employee['status'] == 'Canceled') {
+                    echo "<td> - </td>";
+                } elseif ($employee['due_date'] < date("Y-m-d")) {
+                    echo "<td> <a href='update-task.php?task=". $employee['task_id'] ."'  class='btn btn-sm btn-success'>Update</a> <a href='delete-task.php?task=". $employee['task_id'] ."' class='btn btn-sm btn-danger'>Cancel</a> </td>";
+                } else {
+                    echo "<td> <a href='update-task.php?task=". $employee['task_id'] ."'  class='btn btn-sm btn-success'>Update</a></td>";
+                }
 				echo "</tr>";
 				$seq+=1;
 			}

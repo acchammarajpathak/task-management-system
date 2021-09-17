@@ -30,11 +30,11 @@ session_start();
       <ul class="navbar-nav mx-5 me-auto mb-2 mb-lg-0">
       
 
-        <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="services.php">Services</a></li>
-        <li class="nav-item"><a class="nav-link" href="projects.php">Projects</a></li>
-        <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.php#hero">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.php#services">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.php#projects">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.php#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.php#contact">Contact</a></li>
        
 
       </ul>

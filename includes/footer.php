@@ -1,69 +1,15 @@
- 
-        <div class="container-fluid bg-secondary text-light">
-        <div class="container py-3 lead">
-          <div class="row">
-              <div class="col-4">
+	
+		</div>
+	</div>
+</div>
 
-              <ul class="nav text-light flex-column">
-                <li class="nav-item">
-                  <a class="nav-link link-light" href="#">Active</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link link-light" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link link-light" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link link-light" href="#">Disabled</a>
-                </li>
-            </ul>
+<div class="container-fluid text-light bg-secondary text-center py-3 fixed-bottom">
+<div class="container">
+&copy; 2021 - Task Management System
+</div>
+</div>
 
-            </div>
-          <div class="col-4">
+<script src="../js/bootstrap.bundle.js"></script>
 
-          <ul class="nav text-light flex-column">
-            <li class="nav-item">
-              <a class="nav-link link-light" href="#">Active</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link link-light" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link link-light" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link link-light" href="#">Disabled</a>
-            </li>
-          </ul>
-          
-          </div>
-          <div class="col-4">
-
-          <ul class="nav text-light flex-column">
-            <li class="nav-item">
-              <a class="nav-link link-light" href="#"><i class="fab fa-facebook"></i> Facebook</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link link-light" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link link-light" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link link-light" href="#">Disabled</a>
-            </li>
-          </ul>
-          
-          </div>
-          </div>
-        </div>
-      </div>
-    
-
-
-    <script src="js/bootstrap.js"></script>
-    <script src="js/app.js"></script>
-  
-  </body>
+</body>
 </html>

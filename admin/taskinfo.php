@@ -11,6 +11,7 @@ include("includes/d_header.php");
       <th scope="col">Task Name</th>
       <th scope="col">Price</th>
       <th scope="col">Remarks</th>
+      <th scope="col">Rank</th>
       <th scope="col">Actions</th>
     </tr>
   </thead>
@@ -27,7 +28,9 @@ include("includes/d_header.php");
             <td><?php echo $row['task_name']; ?></td>
             <td><?php echo $row['price']; ?></td>
             <td><?php echo $row['remarks']; ?></td>
-            <td><a class="btn btn-sm btn-info" href="edit_task.php?id=<?php echo $row['task_info_id']; ?>">Update</a></td>
+            <td><?php echo $row['points']; ?></td>
+
+             <td><a class="btn btn-sm btn-info" href="edit_task.php?id=<?php echo $row['task_info_id']; ?>">Update</a></td>
         </tr>
     <?php
     }

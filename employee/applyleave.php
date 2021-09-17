@@ -72,7 +72,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <div class="col-12">
     <label for="start_date" class="form-label">Start Date</label>
-    <input id="start_date" <?php if(!empty($start_date)) { echo "value=" . $start_date; } ?> name="start_date" type="date" class="form-control">
+    <input id="start_date" min="<?php echo date("Y-m-d"); ?>" <?php if(!empty($start_date)) { echo "value=" . $start_date; } ?> name="start_date" type="date" class="form-control">
     <?php
       if(isset($start_date_err)) {
         echo "<span class='text-danger'>" . $start_date_err . "</span>";
@@ -83,7 +83,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <div class="col-12">
     <label for="end_date" class="form-label">End Date</label>
-    <input id="end_date"<?php if(!empty($end_date)) { echo "value=" . $end_date; } ?> name="end_date" type="date" class="form-control">
+    <input id="end_date" min="<?php echo date("Y-m-d"); ?>"<?php if(!empty($end_date)) { echo "value=" . $end_date; } ?> name="end_date" type="date" class="form-control">
     <?php
       if(isset($end_date_err)) {
         echo "<span class='text-danger'>" . $end_date_err . "</span>";

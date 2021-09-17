@@ -38,8 +38,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql2 = "SELECT * FROM task_info WHERE task_info_id = $row[task_info_id];";
         $res2 = mysqli_query($conn, $sql2);
         $row2 = mysqli_fetch_assoc($res2);
+
+        $task_given_by = $row['user_id'];
+        $sql3 = "SELECT firstname, lastname from users WHERE user_id = $task_given_by";
+        $res3 = mysqli_query($conn, $sql3);
+        $row3 = mysqli_fetch_assoc($res3);
+
         ?>
-            <option value="<?php echo $row['task_id'] ?>"><?php echo $row2['task_name'] ?></option>
+            <option value="<?php echo $row['task_id'] ?>"><?php echo $row2['task_name'] . ' - ' . $row3['firstname'] . ' ' . $row3['lastname']; ?></option>
         <?php
     }
     ?>
@@ -54,7 +60,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <?php
 
-    $sql = "SELECT * FROM users WHERE role = 'employee';";
+    $sql = "SELECT *
+    FROM users WHERE role = 'employee' and user_id not in
+    (select emp_id from emp_leave where status = 'approved');";
+    
+
     $res = mysqli_query($conn, $sql);
 
     while($row = mysqli_fetch_assoc($res)) {
